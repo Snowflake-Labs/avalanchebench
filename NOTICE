@@ -1,0 +1,47 @@
+Copyright 2026 Snowflake Inc.
+SPDX-License-Identifier: Apache-2.0
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+AvalancheBench
+Copyright 2026 Snowflake Inc.
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+-------------------------------------------------------------------------------
+Provenance
+-------------------------------------------------------------------------------
+
+The benchmark implementation, tasks, rubrics, and synthetic release datasets
+are works prepared for AvalancheBench. The construction and provenance of the
+synthetic datasets are described in docs/dataset-card.md. No Snowflake customer
+data is included. Publication remains subject to release-owner and legal approval.
+
+-------------------------------------------------------------------------------
+Third-party components and data
+-------------------------------------------------------------------------------
+
+The CATC capability snapshot is derived from the LM Arena leaderboard dataset
+(`lmarena-ai/leaderboard-dataset`), revision
+d25aabda0010d1986a11988e5cb0a748053ce02b, retrieved 2026-09-17.
+Source: https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset/tree/d25aabda0010d1986a11988e5cb0a748053ce02b
+LM Arena licenses this data under Creative Commons Attribution 4.0 International
+(CC BY 4.0): https://creativecommons.org/licenses/by/4.0/ . The bundled snapshot
+is an extracted subset with AvalancheBench model mappings and an anchor added.
+That data retains CC BY 4.0; the project's Apache-2.0 license does not replace it.
+
+The runtime installs Snowflake Connector for Python (Apache-2.0) from PyPI and
+uses the official Python container image. These components are not vendored and
+retain their own licenses. Dataset document and image provenance is described
+in docs/dataset-card.md. The release owner retains dataset rights approval;
+final repository publication remains subject to legal review.

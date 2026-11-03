@@ -1,0 +1,39 @@
+# Copyright 2026 Snowflake Inc.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Refresh task digests with `uv run scripts/refresh_release_metadata.py`.
+
+[dataset]
+name = "snowflake-labs/avalanchebench"
+version = "0.1.0"
+description = "Three long-horizon enterprise analytics tasks over frozen synthetic data."
+keywords = [ "enterprise-analytics", "ecommerce", "customer-support", "multimodal", "travel",]
+[[dataset.authors]]
+name = "Snowflake Inc."
+email = "opensource@snowflake.com"
+
+
+[[tasks]]
+name = "snowflake-labs/avalanchebench-ecommerce"
+digest = "sha256:1bd3def7cec35ffc6d3e99a7bf50122b9a511607aec2eac3d0bed0429be8b3dc"
+
+[[tasks]]
+name = "snowflake-labs/avalanchebench-customer-support"
+digest = "sha256:1a00fc47257623e5cf896b7017c29996d8b4346d38f6566b5906e5bf5bf82ac4"
+
+[[tasks]]
+name = "snowflake-labs/avalanchebench-travel"
+digest = "sha256:36e5fd3b9306ab0148fc0bfcfce6ad5a15a11a2dbe40c81eedd0a5fa7fc56530"
+

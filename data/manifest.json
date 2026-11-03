@@ -1,0 +1,21 @@
+{
+  "archives": {
+    "customer-support": {
+      "bytes": 322991570,
+      "path": "customer-support.zip",
+      "sha256": "7facd266978106171c08fc470284f8011e4ef306fa843f7e04fd4de13ebdd312"
+    },
+    "ecommerce": {
+      "bytes": 3169823,
+      "path": "ecommerce.zip",
+      "sha256": "5a2096c860c5b7d4cd105c52df455bb7adb37cb8d613038c3b5a3b0f31dc068a"
+    },
+    "travel": {
+      "bytes": 95065231,
+      "path": "travel.zip",
+      "sha256": "9d797314cddf2208d3e680a2e20703d069315f9340a8323ff8eeaf1e93c67c0a"
+    }
+  },
+  "benchmark_version": "0.1.0",
+  "schema_version": "0.1.0"
+}

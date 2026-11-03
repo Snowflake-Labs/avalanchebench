@@ -1,0 +1,48 @@
+{
+  "AI_AGG": {
+    "reference_model": "llama3.3-70b",
+    "input_fraction": 0.95
+  },
+  "AI_CLASSIFY": {
+    "reference_model": "llama3.3-70b",
+    "input_fraction": 0.99
+  },
+  "AI_EMBED": {
+    "reference_model": "llama3.3-70b",
+    "input_fraction": 1.0
+  },
+  "AI_EXTRACT": {
+    "reference_model": "llama3.3-70b",
+    "input_fraction": 0.9
+  },
+  "AI_FILTER": {
+    "reference_model": "llama3.3-70b",
+    "input_fraction": 0.99
+  },
+  "AI_PARSE_DOCUMENT": {
+    "reference_model": "claude-sonnet-4-6",
+    "input_tokens_per_page": 2000,
+    "output_tokens_per_page": 600,
+    "pages_per_document": 1.6467
+  },
+  "AI_REDACT": {
+    "reference_model": "llama3.3-70b",
+    "input_fraction": 0.5
+  },
+  "AI_SENTIMENT": {
+    "reference_model": "llama3.3-70b",
+    "input_fraction": 0.95
+  },
+  "AI_SIMILARITY": {
+    "reference_model": "llama3.3-70b",
+    "input_fraction": 1.0
+  },
+  "AI_SUMMARIZE_AGG": {
+    "reference_model": "llama3.3-70b",
+    "input_fraction": 0.8
+  },
+  "AI_TRANSLATE": {
+    "reference_model": "llama3.3-70b",
+    "input_fraction": 0.5
+  }
+}

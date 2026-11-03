@@ -1,0 +1,12 @@
+{
+  "benchmark_version": "0.1.0",
+  "cortex_sha256": "d607c7a251c4bccb031258d40b2a97fa4536a393f1bc712ce078600abf0f3492",
+  "dataset": "ecommerce",
+  "dataset_archive_sha256": "5a2096c860c5b7d4cd105c52df455bb7adb37cb8d613038c3b5a3b0f31dc068a",
+  "evaluator_sha256": "0d3e9d180cf3cb33a5718186b3dd57afafc3d88b56211b9bc88f02be7b40bdc8",
+  "evaluator_source_tree": "ff11a8b84f5fa28642baead5a02d6095b3bb0f26",
+  "extractor_sha256": "61ad654433de0b9da76f05eb7656a6d37524770be1f3f0fc3d23c9552d6c92fa",
+  "instruction_sha256": "09b6fbe2a73e899eadcfac8d96481a0f44c2860f5ce20bdecbc7f7726ae188e8",
+  "rubric_sha256": "c0185e18b5f3c6ee6e6e385c7613b2713c68a790e7337a65d1677c129d29aa2f",
+  "task_version": "0.1.0"
+}

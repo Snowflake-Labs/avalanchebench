@@ -1,0 +1,64 @@
+# Copyright 2026 Snowflake Inc.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "avalanche-bench"
+version = "0.1.0"
+description = "Load, run, score, and measure AvalancheBench 0.1.0"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Snowflake Inc." }]
+dependencies = [
+  "snowflake-connector-python==4.8.1",
+]
+
+[project.scripts]
+avbench = "avalanche_bench.cli:main"
+
+[dependency-groups]
+dev = [
+  "pytest>=9.0.3,<10",
+  "ruff>=0.13.0,<0.14",
+  "pypdf==6.21.4",
+  "pypdfium2==5.14.0",
+  "pillow==13.0.0",
+]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["/data/*.zip"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/avalanche_bench"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
+default = true

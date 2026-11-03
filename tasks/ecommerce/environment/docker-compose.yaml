@@ -1,0 +1,39 @@
+# Copyright 2026 Snowflake Inc.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+services:
+  main:
+    build:
+      context: ${CONTEXT_DIR}
+    image: ${MAIN_IMAGE_NAME}
+    entrypoint: ["sh", "-c"]
+    command:
+      - >-
+        PYTHONPATH=/opt/avbench python -m avalanche_bench.materialize_runtime ecommerce
+        && touch /tmp/entrypoint_ready && sleep infinity
+    network_mode: ${NETWORK_MODE:-bridge}
+    healthcheck:
+      test: ["CMD", "test", "-f", "/tmp/entrypoint_ready"]
+      interval: 5s
+      timeout: 5s
+      retries: 120
+      start_period: 5s
+    environment:
+      - AVBENCH_DEPLOYMENT_MANIFEST_B64=${AVBENCH_DEPLOYMENT_MANIFEST_B64}
+      - SNOWFLAKE_ACCOUNT=${SNOWFLAKE_ACCOUNT:-}
+      - SNOWFLAKE_USER=${SNOWFLAKE_USER:-}
+      - SNOWFLAKE_PAT=${SNOWFLAKE_PAT:-}
+      - SNOWFLAKE_ROLE=${SNOWFLAKE_ROLE:-}
+      - SNOWFLAKE_WAREHOUSE=${SNOWFLAKE_WAREHOUSE:-}
