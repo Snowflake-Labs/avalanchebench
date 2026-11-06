@@ -70,6 +70,10 @@ agreement rewards. `evaluation.json` retains justifications; `run.json` retains
 content hashes, model/endpoint settings, timestamps, request IDs, latency, and
 ordinary token usage.
 
+The Harbor verifier publishes numeric `reward.json` with mode `0644` so a
+non-root host can read it before container cleanup. Reports, evaluation details,
+and run audits retain private mode `0600`.
+
 Release snapshots identify canonical source using `evaluator_source_tree`, the
 Git tree of `src/avalanche_bench` included in the single publication commit.
 The evaluator, extractor, and Cortex modules also retain their individual

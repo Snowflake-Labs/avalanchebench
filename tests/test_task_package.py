@@ -134,6 +134,9 @@ def test_self_contained_task_verifier_succeeds_atomically(tmp_path: Path) -> Non
         ).read_text()
     )
     assert reward["reward"] == 1
+    assert (tmp_path / "reward.json").stat().st_mode & 0o777 == 0o644
+    for name in ("details.json", "run.json", "report-artifact.md"):
+        assert (tmp_path / name).stat().st_mode & 0o777 == 0o600
     if "evaluator_source_tree" in release:
         assert run["evaluator_source_tree"] == release["evaluator_source_tree"]
         assert run["evaluator_source_commit"] is None

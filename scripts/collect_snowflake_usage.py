@@ -225,8 +225,8 @@ def harbor_agent_usage(
 ) -> tuple[list[TokenUsage], str, str | None]:
     agent_result = json_object(result.get("agent_result"))
     model = str(
-        json_object(result.get("agent_info")).get("model_info", {}).get("name")
-        or json_object(result.get("config")).get("agent", {}).get("model_name")
+        json_object(json_object(result.get("agent_info")).get("model_info")).get("name")
+        or json_object(json_object(result.get("config")).get("agent")).get("model_name")
         or "unknown"
     )
     for container in (
@@ -245,8 +245,31 @@ def harbor_agent_usage(
                 continue
             if not isinstance(event, dict):
                 continue
+            if event.get("type") != "result":
+                continue
+            per_model = json_object(event.get("modelUsage"))
+            if per_model and all(
+                isinstance(value, dict) for value in per_model.values()
+            ):
+                usage = [
+                    normalize_usage(
+                        name,
+                        {
+                            "input_tokens": value.get("inputTokens", 0),
+                            "cache_read_input_tokens": value.get(
+                                "cacheReadInputTokens", 0
+                            ),
+                            "cache_creation_input_tokens": value.get(
+                                "cacheCreationInputTokens", 0
+                            ),
+                            "output_tokens": value.get("outputTokens", 0),
+                        },
+                    )
+                    for name, value in per_model.items()
+                ]
+                return usage, "cortex_code_model_usage", None
             raw = json_object(event.get("usage"))
-            if event.get("type") == "result" and raw:
+            if raw:
                 return [normalize_usage(model, raw)], "cortex_code_result_event", None
 
     cache_read = agent_result.get("n_cache_read_tokens")

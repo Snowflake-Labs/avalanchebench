@@ -81,6 +81,53 @@ def test_harbor_detailed_usage_preserves_cache_fields() -> None:
     assert reason is None
 
 
+@pytest.mark.parametrize("agent", [None, {"model_name": "claude-opus-4-8"}])
+def test_harbor_null_model_metadata_uses_configuration_or_unknown(agent) -> None:
+    result = {
+        "agent_info": {"model_info": None},
+        "config": {"agent": agent},
+        "agent_result": {"metadata": {"usage": {"input_tokens": 10}}},
+    }
+    usage, source, reason = collector.harbor_agent_usage(result)
+    model = agent["model_name"] if agent else "unknown"
+    assert usage == [TokenUsage(model, 10, 0, 0, 0)]
+    assert source == "harbor_result_detailed_usage"
+    assert reason is None
+
+
+def test_cortex_code_per_model_usage_preserves_identity_and_cache_split(
+    tmp_path: Path,
+) -> None:
+    log = tmp_path / "cortex-code.txt"
+    log.write_text(
+        json.dumps(
+            {
+                "type": "result",
+                "usage": {"input_tokens": 100, "output_tokens": 40},
+                "modelUsage": {
+                    "claude-opus-4-8": {
+                        "inputTokens": 10,
+                        "cacheReadInputTokens": 20,
+                        "cacheCreationInputTokens": 30,
+                        "outputTokens": 35,
+                    },
+                    "unmapped-model": {"inputTokens": 90, "outputTokens": 5},
+                },
+            }
+        )
+        + "\n"
+    )
+    usage, source, reason = collector.harbor_agent_usage(
+        {"agent_info": {"model_info": None}}, log
+    )
+    assert usage == [
+        TokenUsage("claude-opus-4-8", 10, 20, 30, 35),
+        TokenUsage("unmapped-model", 90, 0, 0, 5),
+    ]
+    assert source == "cortex_code_model_usage"
+    assert reason is None
+
+
 def test_cortex_code_log_recovers_exact_cache_split(tmp_path: Path) -> None:
     log = tmp_path / "cortex-code.txt"
     log.write_text(
