@@ -838,7 +838,7 @@ def prompt_template_sha256() -> str:
     )
 
 
-def _stage_bytes(final: Path, content: bytes) -> Path:
+def _stage_bytes(final: Path, content: bytes, *, mode: int = 0o600) -> Path:
     final.parent.mkdir(parents=True, exist_ok=True)
     descriptor, name = tempfile.mkstemp(
         prefix=f".{final.name}.", suffix=".tmp", dir=final.parent
@@ -847,6 +847,7 @@ def _stage_bytes(final: Path, content: bytes) -> Path:
     try:
         with os.fdopen(descriptor, "wb") as handle:
             handle.write(content)
+            os.fchmod(handle.fileno(), mode)
     except BaseException:
         temporary.unlink(missing_ok=True)
         raise
@@ -863,7 +864,9 @@ def write_bytes_atomically(final: Path, content: bytes) -> None:
         temporary.unlink(missing_ok=True)
 
 
-def write_outputs_atomically(outputs: Iterable[tuple[Path, dict[str, Any]]]) -> None:
+def write_outputs_atomically(
+    outputs: Iterable[tuple[Path, dict[str, Any]]], *, mode: int = 0o600
+) -> None:
     """Publish JSON files only after every complete payload is serialized."""
 
     prepared: list[tuple[Path, Path]] = []
@@ -873,7 +876,7 @@ def write_outputs_atomically(outputs: Iterable[tuple[Path, dict[str, Any]]]) -> 
     try:
         for final, payload in output_list:
             content = (json.dumps(payload, indent=2) + "\n").encode("utf-8")
-            temporary = _stage_bytes(final, content)
+            temporary = _stage_bytes(final, content, mode=mode)
             prepared.append((temporary, final))
         for temporary, final in prepared:
             os.replace(temporary, final)

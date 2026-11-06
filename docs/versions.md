@@ -22,8 +22,10 @@ version `0.1.0`. Public paths and identifiers remain clean and stable; the Git
 tag, root archive manifest, task package metadata, and emitted run hashes carry
 the exact release identity.
 
-Any change to dataset bytes, a task prompt, rubric, reference answer, evaluator,
+Any change to dataset bytes, a task prompt, rubric, reference answer, scoring logic,
 judge committee, aggregation, CATC snapshot/mapping, or container creates a new
 release version and new task/archive digests. Published tags and Git LFS objects
 are immutable and are never replaced in place.
 
+Operational fixes that preserve data and scoring may retain the benchmark
+version, with refreshed source hashes and task digests identifying the patch.

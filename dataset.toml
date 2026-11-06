@@ -27,13 +27,13 @@ email = "opensource@snowflake.com"
 
 [[tasks]]
 name = "snowflake-labs/avalanchebench-ecommerce"
-digest = "sha256:1bd3def7cec35ffc6d3e99a7bf50122b9a511607aec2eac3d0bed0429be8b3dc"
+digest = "sha256:3c62431dbfe5562dab22c5d672b114b43b4a7e2279f627b0a7e2cfe8613b5f43"
 
 [[tasks]]
 name = "snowflake-labs/avalanchebench-customer-support"
-digest = "sha256:1a00fc47257623e5cf896b7017c29996d8b4346d38f6566b5906e5bf5bf82ac4"
+digest = "sha256:e3b7968e4a279dea2c9e5a295979f1c79e48c29a85e5a2a794e96885e4a2f629"
 
 [[tasks]]
 name = "snowflake-labs/avalanchebench-travel"
-digest = "sha256:36e5fd3b9306ab0148fc0bfcfce6ad5a15a11a2dbe40c81eedd0a5fa7fc56530"
+digest = "sha256:c0ca5f1550f4a680a61f0c5c669e93e1b16dc631571e8110ca7d091657e9e2d5"
 

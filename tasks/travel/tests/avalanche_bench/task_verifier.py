@@ -114,11 +114,13 @@ def main() -> int:
         raise
     write_outputs_atomically(
         (
-            (args.reward_output, reward),
             (args.details_output, details),
             (args.run_output, run),
         )
     )
+    # Harbor reads this root-owned bind mount before Docker repairs ownership.
+    # Publish only numeric rewards with host-readable permissions, and publish last.
+    write_outputs_atomically(((args.reward_output, reward),), mode=0o644)
     return 0
 
 

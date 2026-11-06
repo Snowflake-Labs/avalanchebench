@@ -154,6 +154,10 @@ verifier artifacts include the report and evaluation details. For a report
 saved outside Harbor, score it directly with
 `uv run avbench score --task ecommerce --report report.md`.
 
+Check the job's `result.json` for `n_errored_trials = 0` and each trial for a
+non-null `verifier_result` with no `exception_info`. Harbor can exit successfully
+even when a trial failed.
+
 To measure CATC, use the job directory you just found and the same Snowflake
 connection. The collecting role also needs read access to Snowflake
 `ACCOUNT_USAGE` query and Cortex AI usage views (see [CATC](docs/catc.md)):
@@ -170,6 +174,9 @@ rerun collection later if necessary. Judge calls are excluded from CATC.
 The same output reports monetary cost at pinned provider list prices under
 `trials[].monetary_cost` (`total_usd`, or `known_usd_lower_bound` when usage is
 partial); see [Monetary cost](docs/monetary-cost.md).
+Models absent from the pinned Arena or price snapshots keep their recorded token
+usage, but cannot receive complete CATC or monetary cost. Record an explicit
+agent model; Cortex Code's changing `auto` default can use unmapped models.
 
 ## All three tasks
 

@@ -53,8 +53,10 @@ is `llama-3.3-70b-instruct`. Exact ratings and Cortex mappings are in
 
 `agent_catc` covers the benchmark agent. `aisql_catc` covers Snowflake AI calls
 issued by that agent when their model and token attribution are measurable.
-The Harbor collector prefers the four-way usage in the Cortex Code result event
-and uses Harbor's collapsed cache total only as an explicit lower-bound fallback.
+The Harbor collector preserves each model's four-way usage from Cortex Code's
+result-event `modelUsage` when available, including auxiliary and unmapped models.
+Otherwise it uses detailed aggregate usage; Harbor's collapsed cache total is
+an explicit lower-bound fallback.
 
 Agent SQL is attributed by Snowflake session, not only by the trajectory.
 Agents can run SQL from Python or spread it over pooled connections, so many
